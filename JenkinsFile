@@ -21,7 +21,7 @@ pipeline
     stages {
         stage('Checkout from scm') {
             steps {
-                git branch: 'main', url: 'https://github.com/your-repo.git'
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/gaddour1/demo-project.git'
             }
         }
 
