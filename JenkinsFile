@@ -1,0 +1,30 @@
+pipeline
+{
+    agent {
+        label "jenkins-agent"
+    }
+
+    tools {
+        maven 'maven-3.6.3'
+        jdk 'jdk11'
+    }
+
+    stages {
+        stage('cleanup workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+
+
+}
+    stages {
+        stage('Checkout from scm') {
+            steps {
+                git branch: 'main', url: 'https://github.com/your-repo.git'
+            }
+        }
+
+
+}
+}
