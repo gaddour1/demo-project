@@ -24,6 +24,18 @@ pipeline
                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/gaddour1/demo-project.git'
             }
         }
+        
+        stage('Build with maven') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Run tests') {
+            steps {
+                sh 'mvn test'
+            }
+        }
 
 
 }
