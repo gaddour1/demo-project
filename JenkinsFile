@@ -17,7 +17,7 @@ pipeline
         }
 
 
-}
+} //
     stages {
         stage('Checkout from scm') {
             steps {
