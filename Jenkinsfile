@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label "jenkins-agent"
-    }
+    agent any
 
     tools {
         maven 'Maven3'
@@ -23,13 +21,13 @@ pipeline {
 
         stage('Build with Maven') {
             steps {
-                sh 'mvn clean package'   // Use 'bat' instead of 'sh' if Jenkins agent is Windows
+                sh 'mvn clean package'   // Use 'bat' if Jenkins agent is Windows
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'mvn test'           // Same here: use 'bat' on Windows
+                sh 'mvn test'           // Use 'bat' if Windows
             }
         }
     }
