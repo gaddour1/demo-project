@@ -1,5 +1,4 @@
-pipeline
-{
+pipeline {
     agent {
         label "jenkins-agent"
     }
@@ -10,33 +9,40 @@ pipeline
     }
 
     stages {
-        stage('cleanup workspace') {
+        stage('Cleanup Workspace') {
             steps {
                 cleanWs()
             }
         }
 
-
-} ///
-    stages {
-        stage('Checkout from scm') {
+        stage('Checkout from SCM') {
             steps {
                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/gaddour1/demo-project.git'
             }
         }
-        
-        stage('Build with maven') {
+
+        stage('Build with Maven') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean package'   // Use 'bat' instead of 'sh' if Jenkins agent is Windows
             }
         }
 
-        stage('Run tests') {
+        stage('Run Tests') {
             steps {
-                sh 'mvn test'
+                sh 'mvn test'           // Same here: use 'bat' on Windows
             }
         }
+    }
 
-
-}
+    post {
+        always {
+            echo 'Pipeline finished.'
+        }
+        success {
+            echo 'Build succeeded!'
+        }
+        failure {
+            echo 'Build failed!'
+        }
+    }
 }
